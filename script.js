@@ -21,49 +21,14 @@ function addBookToLibrary(title, author, pages, read) {
 }
 
 function displayBooks() {
-    // let div = document.createElement('div');
-    // let card =  div.classList.add('card');
-    // // let text = card.innerHTML = myLibrary[];
-    // let elementCard = document.querySelector('.container');
-    // // element.appendChild(text)
-    
     for(i = 0; i < myLibrary.length; i ++) {
-        // const para = document.createElement("p");
-        // para.classList.add('test')
-        // const node = document.createTextNode(myLibrary[i].info());
-        // para.appendChild(node);
-        // const element = document.querySelector('.container');
-        // element.appendChild(para);
-
-        // const div = document.createElement('div');
-        // div.classList.add('card');
-        // let elementCard = document.querySelector('.container');
-        // elementCard.appendChild(div);
-
-        // const container = document.querySelector('.container');
-        // container.innerHTML+='<div class="card"></div>';
-
-        // const title = document.createElement("p")
-        // title.classList.add('title')
-        // const nodeTitle = document.createTextNode(myLibrary[i].title)
-        // title.appendChild(nodeTitle)
-        // // const element = document.querySelector('.container');
-        // // element.appendChild(title);
-        
-        // const author = document.createElement("p")
-        // author.classList.add('author')
-        // const nodeAuthor = document.createTextNode(myLibrary[i].author)
-        // author.appendChild(nodeAuthor)
-        // // const element = document.querySelector('.container');
-        // element.appendChild(author);
-
         const element = document.querySelector('.books');
         let div = document.createElement("div");
         div.classList.add('card')
         div.innerHTML = ('<p>' + myLibrary[i].title + '</p>' + '<p>' + myLibrary[i].author + '</p>' + '<p>' + 'Pages: ' + myLibrary[i].pages)
         element.append(div)
         
-        console.log(myLibrary[i].info())
+        console.log(myLibrary[i].info() + ' ' + myLibrary[i].id)
     }
 }
 
@@ -71,4 +36,64 @@ addBookToLibrary('The Perfect Loaf', 'Maurizio Leo', 432, 'no');
 addBookToLibrary('Encore', 'Seattle Symphony', 10, 'yes');
 
 displayBooks()
-// console.log(myLibrary[0].info())
+
+
+
+//Modal dialogue
+const addDialog = document.getElementById('newBook');
+const showButton = document.querySelector('dialog + button');
+const closeButton = document.querySelector('dialog button');
+const confirmBtn = document.getElementById('confirmBtn');
+// const newTitle = document.getElementById('title');
+// const newAuthor = document.getElementById('author');
+// const newPages = document.getElementById('pages');
+
+showButton.addEventListener('click', (event) => {
+    event.preventDefault()
+    addDialog.showModal();
+});
+
+closeButton.addEventListener('click', (event) => {
+    event.preventDefault()
+    addDialog.close();
+});
+
+
+confirmBtn.addEventListener('click', (event) => {
+    event.preventDefault()
+    
+    let title = document.getElementById('title').value;
+    let author = document.getElementById('author').value;
+    let pages = document.getElementById('pages').value;
+
+
+    console.log(1 + 1)
+    console.log(title)
+    console.log(author)
+    console.log(pages)
+    addDialog.close();
+    
+
+    if(newBook.returnValue != 'default') {
+        addBookToLibrary(title, author, pages)
+
+        console.log(myLibrary.length)
+
+        //push the last thing of the array to the div
+
+        function postNew() {
+                i = myLibrary.length - 1
+
+                const element = document.querySelector('.books');
+                let div = document.createElement("div");
+                div.classList.add('card');
+
+                div.innerHTML = ('<p>' + myLibrary[i].title + '</p>' + '<p>' + myLibrary[i].author + '</p>' + '<p>' + 'Pages: ' + myLibrary[i].pages)
+                element.append(div)
+                
+                console.log(myLibrary[i].info() + ' ' + myLibrary[i].id)
+        }
+        postNew()
+        
+    }   
+})
