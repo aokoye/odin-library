@@ -8,7 +8,7 @@ function Book(title, author, pages, read, id) {
     this.id = id
 
     this.info = function() {
-        return this.title + " by " + this.author + ", " + this.pages + ", "  + this.read
+        return this.title + " by " + this.author + ", " + this.pages + ", " + this.read
     }
 }
 
@@ -38,7 +38,6 @@ addBookToLibrary('Encore', 'Seattle Symphony', 10, 'yes');
 displayBooks()
 
 
-
 //Modal dialogue
 const addDialog = document.getElementById('newBook');
 const showButton = document.querySelector('dialog + button');
@@ -61,25 +60,15 @@ closeButton.addEventListener('click', (event) => {
 
 confirmBtn.addEventListener('click', (event) => {
     event.preventDefault()
+    addDialog.close();
     
     let title = document.getElementById('title').value;
     let author = document.getElementById('author').value;
     let pages = document.getElementById('pages').value;
-
-
-    console.log(1 + 1)
-    console.log(title)
-    console.log(author)
-    console.log(pages)
-    addDialog.close();
-    
+    let read = document.querySelector('input[name="read"]:checked').value;
 
     if(newBook.returnValue != 'default') {
-        addBookToLibrary(title, author, pages)
-
-        console.log(myLibrary.length)
-
-        //push the last thing of the array to the div
+        addBookToLibrary(title, author, pages, read)
 
         function postNew() {
                 i = myLibrary.length - 1
@@ -90,7 +79,7 @@ confirmBtn.addEventListener('click', (event) => {
 
                 div.innerHTML = ('<p>' + myLibrary[i].title + '</p>' + '<p>' + myLibrary[i].author + '</p>' + '<p>' + 'Pages: ' + myLibrary[i].pages)
                 element.append(div)
-                
+
                 console.log(myLibrary[i].info() + ' ' + myLibrary[i].id)
         }
         postNew()

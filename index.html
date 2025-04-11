@@ -26,8 +26,11 @@
                         <input type="text" id="pages" required>
                     </div>
                     <div class="form-row">
-                        <label for="read">*Have you read this?</label>
-                        <input type="text" id="read" required>
+                        <legend>Have you read this book?</legend>
+                        <input type="radio" id="read-yes" name="read" value="yes">
+                        <label for="read-yes">Yes</label>
+                        <input type="radio" id="read-no" name="read" value="no">
+                        <label for="read-no">No</label>
                     </div>
                     <button value="cancel" formMethod="dialog">Cancel</button>
                     <button id="confirmBtn" value="default">Confirm</button>
