@@ -38,6 +38,8 @@ function displayBooks() {
         div.innerHTML = ('<p>' + myLibrary[i].title + '</p>' + 
         '<p>' + myLibrary[i].author + '</p>' + 
         '<p>' + 'Pages: ' + myLibrary[i].pages + '</p>' +
+        '<p class="readStat">' + 'I have read this: ' + myLibrary[i].read + '</p>' +
+        '<button class="readBtn">read toggle</button>' + '<br />' +
         '<button class="deleteBtn">Delete Book</button>');
         element.append(div)
         // element.appendChild
@@ -53,14 +55,15 @@ addBookToLibrary('Encore', 'Seattle Symphony', 10, 'yes');
 
 displayBooks()
 
+//Delete button
 let dd = document.getElementsByClassName('deleteBtn');
 
 Array.prototype.forEach.call(dd, function(element) {
     element.addEventListener('click', function() {
         const findBook = myLibrary.find((findBook) => findBook.id === element.parentNode.getAttribute("data-id"));
         console.log(findBook)
-        console.log(element.parentNode.getAttribute("data-id"))
-        targetId = element.parentNode.getAttribute("data-id")
+        console.log(element.parentNode.getAttribute("data-id"));
+        targetId = element.parentNode.getAttribute("data-id");
         delBook = document.getElementById(targetId).remove();
         delBook.remove();
        
@@ -74,10 +77,37 @@ Array.prototype.forEach.call(dd, function(element) {
           }
           console.log(indices);
           myLibrary.splice(indices, 1);
-          
-
     });
 });
+
+//Read button
+let rd = document.getElementsByClassName('readBtn');
+
+Array.prototype.forEach.call(rd, function(element) {
+    element.addEventListener('click', function() {
+        const findBook = myLibrary.find((findBook) => findBook.id === element.parentNode.getAttribute("data-id"));
+        targetId = element.parentNode.getAttribute("data-id");
+
+        function updateBook(){
+            myLibrary.map(book => {
+                if (book.id === targetId) {
+                    if (book.read === 'yes'){
+                        book.read = 'no'
+                        let div = document.getElementById(targetId);
+                        let span = div.getElementsByClassName("read");
+                        span.innerHTML = "Not read yet";
+                    } else {
+                        book.read = 'yes'
+                    }
+                }
+            })    
+        }
+        updateBook()
+        console.log(findBook)
+    })
+})
+
+
 
 
 //Modal dialogue
