@@ -40,9 +40,9 @@ function displayBooks() {
         div.classList.add('card')
         div.setAttribute('id', myLibrary[i].dataId)
         div.setAttribute('data-id', myLibrary[i].dataId)
-        div.innerHTML = ('<p>' + myLibrary[i].title + '</p>' + 
-        '<p>' + myLibrary[i].author + '</p>' + 
-        '<p>' + 'Pages: ' + myLibrary[i].pages + '</p>' +
+        div.innerHTML = ('<p class="title">' + myLibrary[i].title + '</p>' + 
+        '<p class="author"> Author: ' + myLibrary[i].author + '</p>' + 
+        '<p class="pages">' + 'Pages: ' + myLibrary[i].pages + '</p>' +
         '<div class="buttons">' +  
         '<button class="readStat">' + readStatus + '</button>' +
         '<button class="deleteBtn">' + delBtn + '</button>') +
@@ -160,9 +160,9 @@ confirmBtn.addEventListener('click', (event) => {
                 div.classList.add('card');
                 div.setAttribute('id', myLibrary[i].dataId)
                 div.setAttribute('data-id', myLibrary[i].dataId)
-                div.innerHTML = ('<p>' + myLibrary[i].title + '</p>' + 
-                '<p>' + myLibrary[i].author + '</p>' + 
-                '<p>' + 'Pages: ' + myLibrary[i].pages + '</p>' +
+                div.innerHTML = ('<p class="title">' + myLibrary[i].title + '</p>' + 
+                '<p class="author"> Author: ' + myLibrary[i].author + '</p>' + 
+                '<p class="pages">' + 'Pages: ' + myLibrary[i].pages + '</p>' +
                 '<div class="buttons">' +
                 '<button class="readStat">' + readStatus + '</button>' +
                 '<button class="deleteBtn">' + delBtn + '</button>' + 
@@ -214,7 +214,6 @@ confirmBtn.addEventListener('click', (event) => {
                     if (book.id === targetId) {
                         if (book.read === 'yes'){
                             book.read = 'no'
-                            let div = document.getElementById(targetId);
                             element.innerHTML = "<iconify-icon icon='mdi:book-remove' width=32' height='32'></iconify-icon>";
                         } else {
                             book.read = 'yes'

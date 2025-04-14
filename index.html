@@ -9,36 +9,41 @@
     <title>Library</title>
 </head>
 <body>
-    <h1>Your Library</h1>
+    
     <div class="container">
-        <div class="addBook">
-            <dialog id="newBook">
-                <form>
-                    <div class="form-row">
-                        <label for="title">*Title</label>
-                        <input type="text" id="title" required>
-                    </div>
-                    <div class="form-row">
-                        <label for="author">*Author</label>
-                        <input type="text" id="author" required>
-                    </div>
-                    <div class="form-row">
-                        <label for="pages">*Number of Pages</label>
-                        <input type="text" id="pages" required>
-                    </div>
-                    <div class="form-row">
-                        <legend>Have you read this book?</legend>
-                        <input type="radio" id="read-yes" name="read" value="yes">
-                        <label for="read-yes">Yes</label>
-                        <input type="radio" id="read-no" name="read" value="no">
-                        <label for="read-no">No</label>
-                    </div>
-                    <button value="cancel" formMethod="dialog"><iconify-icon icon="mdi:cancel-circle" width="18" height="18"></iconify-icon></button>
-                    <button id="confirmBtn" value="default">Confirm</button>
-                </form>  
-            </dialog>
-            <button id="add">Add a New Book</button>
+        <header>
+            <h1>Your Library</h1>
+            <div class="addBook">
+        
+        
+        <dialog id="newBook">
+            <form>
+                <div class="form-row">
+                    <label for="title">*Title</label>
+                    <input type="text" id="title" required>
+                </div>
+                <div class="form-row">
+                    <label for="author">*Author</label>
+                    <input type="text" id="author" required>
+                </div>
+                <div class="form-row">
+                    <label for="pages">*Number of Pages</label>
+                    <input type="text" id="pages" required>
+                </div>
+                <div class="form-row">
+                    <legend>Have you read this book?</legend>
+                    <input type="radio" id="read-yes" name="read" value="yes" required>
+                    <label for="read-yes">Yes</label>
+                    <input type="radio" id="read-no" name="read" value="no">
+                    <label for="read-no">No</label>
+                </div>
+                <button value="cancel" formMethod="dialog"><iconify-icon icon="mdi:cancel-circle" width="18" height="18"></iconify-icon></button>
+                <button id="confirmBtn" value="default">Confirm</button>
+            </form>  
+        </dialog>
+        <button id="add">Add a New Book</button>
         </div>
+        </header>
     
         <div class="books"></div>
         
