@@ -1,5 +1,4 @@
 const myLibrary = [];
-// const id = myLibrary[i].id
 
 function Book(title, author, pages, read, id, dataId) {
     this.title = title;
@@ -27,10 +26,16 @@ function addBookToLibrary(title, author, pages, read) {
 function displayBooks() {
     for(i = 0; i < myLibrary.length; i ++) {
         const element = document.querySelector('.books');
-        // let pages = myLibrary[i].pages;
         let div = document.createElement("div");
-        // let button = document.createElement(button);
 
+        let delBtn = "<iconify-icon icon='mdi:trash-can-empty' width=32' height='32'></iconify-icon>";
+        let readStatus = myLibrary[i].read;
+
+        if (myLibrary[i].read === "no") {
+            readStatus = "<iconify-icon icon='mdi:book-remove' width=32' height='32'></iconify-icon>"
+        } else {
+            readStatus = "<iconify-icon icon='mdi:book-check' width=32' height='32'></iconify-icon>"
+        }
         
         div.classList.add('card')
         div.setAttribute('id', myLibrary[i].dataId)
@@ -38,13 +43,12 @@ function displayBooks() {
         div.innerHTML = ('<p>' + myLibrary[i].title + '</p>' + 
         '<p>' + myLibrary[i].author + '</p>' + 
         '<p>' + 'Pages: ' + myLibrary[i].pages + '</p>' +
-        '<p class="readStat">' + 'I have read this: ' + myLibrary[i].read + '</p>' +
-        '<button class="readBtn">read toggle</button>' + '<br />' +
-        '<button class="deleteBtn">Delete Book</button>');
+        '<div class="buttons">' +  
+        '<button class="readStat">' + readStatus + '</button>' +
+        '<button class="deleteBtn">' + delBtn + '</button>') +
+        '</div>';
         element.append(div)
-        // element.appendChild
 
-        // document.querySelector('.deleteBook').setAttribute('data-id',myLibrary[i].dataId)
         console.log(myLibrary[i].info() + ' ' + myLibrary[i].id)
     }  
 }
@@ -62,8 +66,8 @@ Array.prototype.forEach.call(dd, function(element) {
     element.addEventListener('click', function() {
         const findBook = myLibrary.find((findBook) => findBook.id === element.parentNode.getAttribute("data-id"));
         console.log(findBook)
-        console.log(element.parentNode.getAttribute("data-id"));
-        targetId = element.parentNode.getAttribute("data-id");
+        console.log(element.parentNode.parentNode.getAttribute("data-id"));
+        targetId = element.parentNode.parentNode.getAttribute("data-id");
         delBook = document.getElementById(targetId).remove();
         delBook.remove();
        
@@ -81,12 +85,12 @@ Array.prototype.forEach.call(dd, function(element) {
 });
 
 //Read button
-let rd = document.getElementsByClassName('readBtn');
+let rd = document.getElementsByClassName('readStat');
 
 Array.prototype.forEach.call(rd, function(element) {
     element.addEventListener('click', function() {
-        const findBook = myLibrary.find((findBook) => findBook.id === element.parentNode.getAttribute("data-id"));
-        targetId = element.parentNode.getAttribute("data-id");
+        const findBook = myLibrary.find((findBook) => findBook.id === element.parentNode.parentNode.getAttribute("data-id"));
+        targetId = element.parentNode.parentNode.getAttribute("data-id");
 
         function updateBook(){
             myLibrary.map(book => {
@@ -94,10 +98,10 @@ Array.prototype.forEach.call(rd, function(element) {
                     if (book.read === 'yes'){
                         book.read = 'no'
                         let div = document.getElementById(targetId);
-                        let span = div.getElementsByClassName("read");
-                        span.innerHTML = "Not read yet";
+                        element.innerHTML = "<iconify-icon icon='mdi:book-remove' width=32' height='32'></iconify-icon>";
                     } else {
                         book.read = 'yes'
+                        element.innerHTML = "<iconify-icon icon='mdi:book-check' width=32' height='32'></iconify-icon>";
                     }
                 }
             })    
@@ -115,9 +119,6 @@ const addDialog = document.getElementById('newBook');
 const showButton = document.querySelector('dialog + button');
 const closeButton = document.querySelector('dialog button');
 const confirmBtn = document.getElementById('confirmBtn');
-// const newTitle = document.getElementById('title');
-// const newAuthor = document.getElementById('author');
-// const newPages = document.getElementById('pages');
 
 showButton.addEventListener('click', (event) => {
     event.preventDefault()
@@ -129,7 +130,7 @@ closeButton.addEventListener('click', (event) => {
     addDialog.close();
 });
 
-
+//Add book to library (and many duplicated functions)
 confirmBtn.addEventListener('click', (event) => {
     event.preventDefault()
     addDialog.close();
@@ -145,12 +146,27 @@ confirmBtn.addEventListener('click', (event) => {
         function postNew() {
                 i = myLibrary.length - 1
 
+                let delBtn = "<iconify-icon icon='mdi:trash-can-empty' width=32' height='32'></iconify-icon>";
+                let readStatus = myLibrary[i].read;
+
+                if (myLibrary[i].read === "no") {
+                    readStatus = "<iconify-icon icon='mdi:book-remove' width=32' height='32'></iconify-icon>"
+                } else {
+                    readStatus = "<iconify-icon icon='mdi:book-check' width=32' height='32'></iconify-icon>"
+        }
+
                 const element = document.querySelector('.books');
                 let div = document.createElement("div");
                 div.classList.add('card');
                 div.setAttribute('id', myLibrary[i].dataId)
                 div.setAttribute('data-id', myLibrary[i].dataId)
-                div.innerHTML = ('<p>' + myLibrary[i].title + '</p>' + '<p>' + myLibrary[i].author + '</p>' + '<p>' + 'Pages: ' + myLibrary[i].pages + '</p>' + '<button class="deleteBtn">Delete Book</button>')
+                div.innerHTML = ('<p>' + myLibrary[i].title + '</p>' + 
+                '<p>' + myLibrary[i].author + '</p>' + 
+                '<p>' + 'Pages: ' + myLibrary[i].pages + '</p>' +
+                '<div class="buttons">' +
+                '<button class="readStat">' + readStatus + '</button>' +
+                '<button class="deleteBtn">' + delBtn + '</button>' + 
+                '</div>');
                 element.append(div)
 
                 console.log(myLibrary[i].info() + ' ' + myLibrary[i].id)
@@ -163,8 +179,8 @@ confirmBtn.addEventListener('click', (event) => {
             element.addEventListener('click', function() {
                 const findBook = myLibrary.find((findBook) => findBook.id === element.parentNode.getAttribute("data-id"));
                 console.log(findBook)
-                console.log(element.parentNode.getAttribute("data-id"))
-                targetId = element.parentNode.getAttribute("data-id")
+                console.log(element.parentNode.parentNode.getAttribute("data-id"))
+                targetId = element.parentNode.parentNode.getAttribute("data-id")
                 delBook = document.getElementById(targetId).remove();
                 delBook.remove();
                
@@ -184,7 +200,34 @@ confirmBtn.addEventListener('click', (event) => {
         });
 
     
-    }   
+    }  
+    
+    let rd = document.getElementsByClassName('readStat');
+
+    Array.prototype.forEach.call(rd, function(element) {
+        element.addEventListener('click', function() {
+            const findBook = myLibrary.find((findBook) => findBook.id === element.parentNode.parentNode.getAttribute("data-id"));
+            targetId = element.parentNode.parentNode.getAttribute("data-id");
+
+            function updateBook(){
+                myLibrary.map(book => {
+                    if (book.id === targetId) {
+                        if (book.read === 'yes'){
+                            book.read = 'no'
+                            let div = document.getElementById(targetId);
+                            element.innerHTML = "<iconify-icon icon='mdi:book-remove' width=32' height='32'></iconify-icon>";
+                        } else {
+                            book.read = 'yes'
+                            element.innerHTML = "<iconify-icon icon='mdi:book-check' width=32' height='32'></iconify-icon>";
+                        }
+                    }
+                })    
+            }
+            updateBook()
+            console.log(findBook)
+        })
+    })
+
 })
 
 
